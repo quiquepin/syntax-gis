@@ -56,12 +56,24 @@
       <bean class="info.magnolia.module.blossom.view.JspTemplateViewRenderer">
         <property name="contextAttributes">
           <map>
-            <entry key="damfn">
-              <bean class="info.magnolia.rendering.renderer.ContextAttributeConfiguration">
-                <property name="name" value="damfn"/>
-                <property name="componentClass" value="info.magnolia.dam.asset.functions.DamTemplatingFunctions"/>
-              </bean>
-            </entry>
+              <entry key="cms">
+                  <bean class="info.magnolia.rendering.renderer.ContextAttributeConfiguration">
+                      <property name="name" value="cms"/>
+                      <property name="componentClass" value="info.magnolia.templating.freemarker.Directives"/>
+                  </bean>
+              </entry>
+              <entry key="cmsfn">
+                  <bean class="info.magnolia.rendering.renderer.ContextAttributeConfiguration">
+                      <property name="name" value="cmsfn"/>
+                      <property name="componentClass" value="info.magnolia.templating.functions.TemplatingFunctions"/>
+                  </bean>
+              </entry>
+              <entry key="damfn">
+                  <bean class="info.magnolia.rendering.renderer.ContextAttributeConfiguration">
+                      <property name="name" value="damfn"/>
+                      <property name="componentClass" value="info.magnolia.dam.asset.functions.DamTemplatingFunctions"/>
+                  </bean>
+              </entry>
           </map>
         </property>
       </bean>

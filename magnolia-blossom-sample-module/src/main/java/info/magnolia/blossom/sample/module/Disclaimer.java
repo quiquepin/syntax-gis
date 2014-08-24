@@ -34,11 +34,13 @@
 package info.magnolia.blossom.sample.module;
 
 import info.magnolia.context.MgnlContext;
+import info.magnolia.dam.asset.config.DamConfig;
 import info.magnolia.jcr.util.PropertyUtil;
 import info.magnolia.module.blossom.annotation.Area;
 import info.magnolia.module.blossom.annotation.AvailableComponentClasses;
 import info.magnolia.module.blossom.annotation.TabFactory;
 import info.magnolia.module.blossom.annotation.Template;
+import info.magnolia.module.blossom.dialog.DialogCreationContext;
 import info.magnolia.ui.form.config.TabBuilder;
 import info.magnolia.ui.framework.config.UiConfig;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.servlet.http.HttpSession;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Template with two columns, a main content area and a right side column.
@@ -87,23 +91,55 @@ public class Disclaimer {
         }
 
         String current = PropertyUtil.getString(currentContentNode, "title");
-        String next = PropertyUtil.getString(currentContentNode, "nextPage");
+        try {
+            Node logo = currentContentNode.getNode("logo");
+        }
+        catch (Exception ex){
 
+        }
         session.setAttribute("requestOrigin", current);
-        model.put("previousPage", expectedPrevious);
-        model.put("nextPage", next);
+        //model.put("previousPage", expectedPrevious);
+        //model.put("nextPage", next);
 
         return "pages/disclaimer.jsp";
     }
 
     @TabFactory("Content")
-    public void contentTab(UiConfig cfg, TabBuilder tab) {
+    public void contentTab(UiConfig cfg,DialogCreationContext
+            dialogCreationContext, TabBuilder tab, DamConfig damConfig) {
+
+        Set<String> disclaimerSiblings = getNavigationItems(dialogCreationContext);
+
         tab.fields(
+                damConfig.fields.damUpload("logo").label("logo").binaryNodeName("logo"),
                 cfg.fields.text("title").label("Title"),
                 cfg.fields.text("previousPage").label("Previous Page"),
                 cfg.fields.text("nextPage").label("Next Page"),
-                cfg.fields.text("originPage").label("Origin Page"),
-                cfg.fields.checkbox("hideInNavigation").label("Hide in navigation").description("Check this box to hide this page in navigation").buttonLabel("")
+                //cfg.fields.select("previousPage").label("Previous Page").options(disclaimerSiblings),
+                //cfg.fields.select("nextPage").label("Next Page").options(disclaimerSiblings),
+                cfg.fields.select("originPage").label("Origin Page").options(disclaimerSiblings)
         );
+    }
+
+    private Set<String> getNavigationItems(DialogCreationContext dialogCreationContext) {
+        Set<String> disclaimerSiblings = new HashSet<String>();
+        disclaimerSiblings.add("");
+//        try {
+//            Node currentNode = dialogCreationContext.getContentNode();
+//            String currentNodeTemplate = NodeTypes.Renderable.getTemplate(currentNode);
+//            Iterator<Node> siblings = NodeUtil.getSiblings(currentNode).iterator();
+//            while(siblings.hasNext())
+//            {
+//                Node sibling = siblings.next();
+//                if(NodeTypes.Renderable.getTemplate(sibling).equals(currentNodeTemplate)){
+//                    String title = sibling.getProperty("title").getString();
+//                    disclaimerSiblings.add(title);
+//                }
+//            }
+//        } catch (RepositoryException e) {
+//            e.printStackTrace();
+//        }
+
+        return disclaimerSiblings;
     }
 }
