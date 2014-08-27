@@ -38,8 +38,10 @@ import info.magnolia.dam.asset.config.DamConfig;
 import info.magnolia.jcr.util.PropertyUtil;
 import info.magnolia.module.blossom.annotation.Area;
 import info.magnolia.module.blossom.annotation.AvailableComponentClasses;
-import info.magnolia.module.blossom.annotation.TabFactory;
+import info.magnolia.module.blossom.annotation.Inherits;
 import info.magnolia.module.blossom.annotation.Template;
+import info.magnolia.module.blossom.annotation.TabFactory;
+import info.magnolia.module.blossom.annotation.TernaryBoolean;
 import info.magnolia.module.blossom.dialog.DialogCreationContext;
 import info.magnolia.ui.form.config.TabBuilder;
 import info.magnolia.ui.framework.config.UiConfig;
@@ -61,6 +63,30 @@ import java.util.Set;
 @SessionAttributes("requestOrigin")
 @Template(title = "Disclaimer", id = "blossomSampleModule:pages/disclaimer")
 public class Disclaimer {
+
+    /**
+     * Promos area, uses the {@link info.magnolia.blossom.sample.module.DisclaimerTitle} component category annotation to specify which components are available.
+     */
+    @Controller
+    @Area(value = "title", maxComponents = 1, optional = TernaryBoolean.TRUE)
+    @Inherits
+    @AvailableComponentClasses({DisclaimerTitle.class})
+    public static class DisclaimerTitleArea {
+
+        @RequestMapping("/mainTemplate/title")
+        public String render() {
+            return "pages/disclaimerTitleArea.jsp";
+        }
+
+        @TabFactory("Content")
+        public void contentTab(UiConfig cfg, TabBuilder tab, DamConfig damConfig) {
+
+            tab.fields(
+                    damConfig.fields.damUpload("logo").label("logo").binaryNodeName("logo"),
+                    cfg.fields.text("title").label("Title")
+            );
+        }
+    }
 
     /**
      * Main area.

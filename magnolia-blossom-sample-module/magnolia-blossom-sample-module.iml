@@ -60,12 +60,10 @@
     <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.9-RC1" level="project" />
     <orderEntry type="library" name="Maven: org.javassist:javassist:3.16.1-GA" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia:magnolia-templating:5.2.7" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia:magnolia-templating-jsp:5.2.7" level="project" />
-    <orderEntry type="library" name="Maven: org.devlib.schmidt:imageinfo:1.7" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.blossom:magnolia-module-blossom:3.0.3" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-framework:5.2.8" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-workbench:5.2.7" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-imageprovider:5.2.8" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.dam:magnolia-dam:1.2.6" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-contentapp:5.2.5" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-vaadin-integration:5.2.5" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-api:5.2.7" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-server:7.1.7" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-shared:7.1.7" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-shared-deps:1.0.2" level="project" />
@@ -75,10 +73,8 @@
     <orderEntry type="library" name="Maven: net.sourceforge.cssparser:cssparser:0.9.5" level="project" />
     <orderEntry type="library" name="Maven: commons-cli:commons-cli:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.6.3" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-vaadin-integration:5.2.8" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-api:5.2.7" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-vaadin-common-widgets:5.2.8" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-vaadin-common-widgets:5.2.5" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-client-compiled:7.1.7" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:7.1.7" level="project" />
     <orderEntry type="library" name="Maven: org.vaadin.addons:cssinject:2.0.3" level="project" />
@@ -87,6 +83,10 @@
     <orderEntry type="library" name="Maven: org.vaadin.addons:gwt-graphics:1.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.vaadin.addons:ckeditor-wrapper-for-vaadin:7.8.8" level="project" />
     <orderEntry type="library" name="Maven: com.jhlabs:filters:2.0.235" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-workbench:5.2.7" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-imageprovider:5.2.7" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-admincentral:5.2.7" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-framework:5.2.8" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-actionbar:5.2.8" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-dialog:5.2.8" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-form:5.2.7" level="project" />
@@ -95,12 +95,16 @@
     <orderEntry type="library" name="Maven: org.objenesis:objenesis:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-compress:1.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:1.8.6" level="project" />
-    <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-admincentral:5.2.7" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia:magnolia-module-imaging:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-vaadin-theme:5.2.7" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-vaadin-widgetset:5.2.7" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-widget-editor:5.2.7" level="project" />
     <orderEntry type="library" name="Maven: info.magnolia.ui:magnolia-ui-mediaeditor:5.2.7" level="project" />
+    <orderEntry type="library" name="Maven: org.vaadin.addons:imagefilter:0.5.3" level="project" />
+    <orderEntry type="library" name="Maven: org.vaadin.addons:customfield:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.devlib.schmidt:imageinfo:1.7" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia:magnolia-templating-jsp:5.2.7" level="project" />
+    <orderEntry type="library" name="Maven: info.magnolia.blossom:magnolia-module-blossom:3.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:3.2.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.2.10.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-core:3.2.10.RELEASE" level="project" />

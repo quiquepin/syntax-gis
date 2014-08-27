@@ -41,7 +41,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Component category annotation, all components annotated with it will be available in the promos area of
+ * Component category annotation, all components annotated with it will be available in the title area of
  * {@link info.magnolia.blossom.sample.module.MainTemplate}.
  */
 @Retention(RetentionPolicy.RUNTIME)
