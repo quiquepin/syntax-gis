@@ -1,5 +1,5 @@
 /**
- * This file Copyright (c) 2013-2014 Magnolia International
+ * This file Copyright (c) 2010-2014 Magnolia International
  * Ltd.  (http://www.magnolia-cms.com). All rights reserved.
  *
  *
@@ -33,37 +33,34 @@
  */
 package info.magnolia.blossom.sample.module;
 
+import info.magnolia.dam.asset.config.DamConfig;
 import info.magnolia.module.blossom.annotation.TabFactory;
 import info.magnolia.module.blossom.annotation.Template;
 import info.magnolia.module.blossom.annotation.TemplateDescription;
 import info.magnolia.ui.form.config.TabBuilder;
 import info.magnolia.ui.framework.config.UiConfig;
-
-import javax.jcr.Node;
-import javax.jcr.RepositoryException;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Component hosting youtube videos.
+ * Simple component for adding text to a page.
  */
 @Controller
-@Template(title="Youtube video Enrique", id="blossomSampleModule:components/youtube")
-@TemplateDescription("Embeds a youtube page")
-public class YoutubeComponent {
+@Template(title = "Text", id = "blossomSampleModule:components/text")
+@TemplateDescription("Simple text block")
+@Promo
+public class DocumentsComponent {
 
-    @RequestMapping("/youtube")
-    public String render(Node node, ModelMap model) throws RepositoryException {
-        model.put("videoId", node.getProperty("videoId").getString());
-        return "components/youtube.jsp";
+    @RequestMapping("/documents")
+    public String render() {
+        return "components/documents.jsp";
     }
 
     @TabFactory("Content")
-    public void contentTab(UiConfig cfg, TabBuilder tab) {
+    public void contentTab(UiConfig cfg, DamConfig damConfig, TabBuilder tab) {
         tab.fields(
-                cfg.fields.text("videoId").label("Video id")
+                cfg.fields.text("heading").label("Heading"),
+                cfg.fields.richText("body").label("Text body")
         );
     }
 }

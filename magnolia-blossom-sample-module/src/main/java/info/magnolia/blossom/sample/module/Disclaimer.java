@@ -64,11 +64,24 @@ import java.util.Set;
 @Template(title = "Disclaimer", id = "blossomSampleModule:pages/disclaimer")
 public class Disclaimer {
 
+    private static final String REQUEST_ORIGIN_PROPERTY = "requestOrigin";
+    private static final String PREVIOUS_PAGE_PROPERTY = "previousPage";
+    private static final String NEXT_PAGE_PROPERTY = "nextPage";
+    private static final String LOGO_PROPERTY = "logo";
+    private static final String TITLE_PROPERTY = "title";
+    private static final String LOGO_LABEL = "Logo";
+    private static final String TITLE_LABEL = "Title";
+    private final String IN_EDIT_PROPERTY = "IN_EDIT_PROPERTY";
+    private final String IN_EDIT_LABEL = "In Edition";
+    private final String PREVIOUS_PAGE_LABEL = "Previous Page";
+    private final String NEXT_PAGE_LABEL = "Next Page";
+    private final String ORIGIN_PAGE_LABEL = "Origin Page";
+
     /**
      * Promos area, uses the {@link info.magnolia.blossom.sample.module.DisclaimerTitle} component category annotation to specify which components are available.
      */
     @Controller
-    @Area(value = "title", maxComponents = 1, optional = TernaryBoolean.TRUE)
+    @Area(value = "TITLE_LABEL", maxComponents = 1, optional = TernaryBoolean.TRUE)
     @Inherits
     @AvailableComponentClasses({DisclaimerTitle.class})
     public static class DisclaimerTitleArea {
@@ -82,8 +95,8 @@ public class Disclaimer {
         public void contentTab(UiConfig cfg, TabBuilder tab, DamConfig damConfig) {
 
             tab.fields(
-                    damConfig.fields.damUpload("logo").label("logo").binaryNodeName("logo"),
-                    cfg.fields.text("title").label("Title")
+                    damConfig.fields.damUpload(LOGO_PROPERTY).label(LOGO_LABEL).binaryNodeName(LOGO_PROPERTY),
+                    cfg.fields.text(TITLE_PROPERTY).label(TITLE_LABEL)
             );
         }
     }
@@ -92,9 +105,9 @@ public class Disclaimer {
      * Main area.
      */
     @Area("main")
-    @Controller
-    @AvailableComponentClasses({TextComponent.class, BookComponent.class, TourComponent.class, CommentsComponent.class, ViewShoppingCartComponent.class, PurchaseComponent.class, ContactFormComponent.class, YoutubeComponent.class, TwoColumnComponent.class})
-    public static class DisclaimerMainArea {
+     @Controller
+//    @AvailableComponentClasses({TextComponent.class, BookComponent.class, TourComponent.class, CommentsComponent.class, ViewShoppingCartComponent.class, PurchaseComponent.class, ContactFormComponent.class, YoutubeComponent.class, TwoColumnComponent.class})
+     public static class DisclaimerMainArea {
 
         @RequestMapping("/disclaimer/main")
         public String render() {
@@ -106,44 +119,40 @@ public class Disclaimer {
     public String render(Node page, ModelMap model, HttpSession session) throws RepositoryException {
 
         Node currentContentNode = MgnlContext.getAggregationState().getCurrentContentNode();
-        String requestOrigin = (String) session.getAttribute("requestOrigin");
-        String expectedPrevious = PropertyUtil.getString(currentContentNode, "previousPage");
+    String requestOrigin = (String) session.getAttribute(REQUEST_ORIGIN_PROPERTY);
+    String expectedPrevious = PropertyUtil.getString(currentContentNode, PREVIOUS_PAGE_PROPERTY);
+    String next = PropertyUtil.getString(currentContentNode, NEXT_PAGE_PROPERTY);
 
-        if(expectedPrevious!=null && !expectedPrevious.equals(requestOrigin)) {
-            //Redirect to Origin of Flow
-            String originOfFlow = PropertyUtil.getString(currentContentNode, "originPage") + ".html";
-            //String originOfFlow = "test1.html";
-            return "redirect:" + originOfFlow;
-        }
+    boolean inEdit = PropertyUtil.getBoolean(currentContentNode, IN_EDIT_PROPERTY, true);
 
-        String current = PropertyUtil.getString(currentContentNode, "title");
-        try {
-            Node logo = currentContentNode.getNode("logo");
-        }
-        catch (Exception ex){
-
-        }
-        session.setAttribute("requestOrigin", current);
-        //model.put("previousPage", expectedPrevious);
-        //model.put("nextPage", next);
-
-        return "pages/disclaimer.jsp";
+    if (expectedPrevious != null && !inEdit && !expectedPrevious.equals(requestOrigin)) {
+        //Redirect to Origin of Flow
+        String originOfFlow = PropertyUtil.getString(currentContentNode, REQUEST_ORIGIN_PROPERTY) + ".html";
+        return "redirect:" + originOfFlow;
     }
 
+    String current = PropertyUtil.getString(currentContentNode, TITLE_PROPERTY);
+    session.setAttribute(REQUEST_ORIGIN_PROPERTY, current);
+    model.put(PREVIOUS_PAGE_PROPERTY, expectedPrevious);
+    model.put(NEXT_PAGE_PROPERTY, next);
+
+    return "pages/disclaimer.jsp";
+}
+
     @TabFactory("Content")
-    public void contentTab(UiConfig cfg,DialogCreationContext
+    public void contentTab(UiConfig cfg, DialogCreationContext
             dialogCreationContext, TabBuilder tab, DamConfig damConfig) {
 
         Set<String> disclaimerSiblings = getNavigationItems(dialogCreationContext);
 
         tab.fields(
-                damConfig.fields.damUpload("logo").label("logo").binaryNodeName("logo"),
-                cfg.fields.text("title").label("Title"),
-                cfg.fields.text("previousPage").label("Previous Page"),
-                cfg.fields.text("nextPage").label("Next Page"),
-                //cfg.fields.select("previousPage").label("Previous Page").options(disclaimerSiblings),
-                //cfg.fields.select("nextPage").label("Next Page").options(disclaimerSiblings),
-                cfg.fields.select("originPage").label("Origin Page").options(disclaimerSiblings)
+                damConfig.fields.damUpload(LOGO_PROPERTY).label(LOGO_LABEL).binaryNodeName(LOGO_PROPERTY),
+                cfg.fields.text(TITLE_PROPERTY).label(TITLE_LABEL),
+//                cfg.fields.checkbox(IN_EDIT_PROPERTY).label(IN_EDIT_LABEL),
+//                cfg.fields.select(PREVIOUS_PAGE_PROPERTY).label(PREVIOUS_PAGE_LABEL).options(disclaimerSiblings),
+//                cfg.fields.select(NEXT_PAGE_PROPERTY).label(NEXT_PAGE_LABEL).options(disclaimerSiblings),
+//                cfg.fields.select(REQUEST_ORIGIN_PROPERTY).label(ORIGIN_PAGE_LABEL).options(disclaimerSiblings),
+                cfg.fields.link("test").label("test").appName("pages")
         );
     }
 
@@ -154,12 +163,11 @@ public class Disclaimer {
 //            Node currentNode = dialogCreationContext.getContentNode();
 //            String currentNodeTemplate = NodeTypes.Renderable.getTemplate(currentNode);
 //            Iterator<Node> siblings = NodeUtil.getSiblings(currentNode).iterator();
-//            while(siblings.hasNext())
-//            {
+//            while (siblings.hasNext()) {
 //                Node sibling = siblings.next();
-//                if(NodeTypes.Renderable.getTemplate(sibling).equals(currentNodeTemplate)){
-//                    String title = sibling.getProperty("title").getString();
-//                    disclaimerSiblings.add(title);
+//                if (NodeTypes.Renderable.getTemplate(sibling) != null && NodeTypes.Renderable.getTemplate(sibling).equals(currentNodeTemplate)) {
+//                    String siblingTitle = sibling.getProperty(TITLE_PROPERTY).getString();
+//                    disclaimerSiblings.add(siblingTitle);
 //                }
 //            }
 //        } catch (RepositoryException e) {
