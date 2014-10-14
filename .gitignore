@@ -1,4 +1,11 @@
 *.DS_Store
 .idea/
 *target*
+*.iml
+*/target/
+/.project
+*.ipr
+*.iws
+*/target/
+*/overlays/
 
