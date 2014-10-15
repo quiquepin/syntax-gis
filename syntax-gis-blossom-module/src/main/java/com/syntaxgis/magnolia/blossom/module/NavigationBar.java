@@ -31,7 +31,7 @@
  * intact.
  *
  */
-package info.magnolia.blossom.sample.module;
+package com.syntaxgis.magnolia.blossom.module;
 
 import info.magnolia.context.MgnlContext;
 import info.magnolia.jcr.util.PropertyUtil;

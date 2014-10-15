@@ -4,8 +4,8 @@
   <name>blossomSampleModule</name>
   <displayName>${project.name}</displayName>
   <description>${project.description}</description>
-  <class>info.magnolia.blossom.sample.module.BlossomSampleModule</class>
-  <versionHandler>info.magnolia.blossom.sample.module.setup.BlossomSampleModuleVersionHandler</versionHandler>
+  <class>com.syntaxgis.magnolia.blossom.module.BlossomSampleModule</class>
+  <versionHandler>com.syntaxgis.magnolia.blossom.module.setup.BlossomSampleModuleVersionHandler</versionHandler>
   <version>${project.version}</version>
 
   <dependencies>

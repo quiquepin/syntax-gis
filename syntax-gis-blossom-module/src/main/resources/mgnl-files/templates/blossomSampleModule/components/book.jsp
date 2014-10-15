@@ -1,4 +1,4 @@
-<%--@elvariable id="book" type="info.magnolia.blossom.sample.module.service.Book"--%>
+<%--@elvariable id="book" type="com.syntaxgis.magnolia.blossom.module.service.Book"--%>
 <%@ include file="../includes/taglibs.jsp"%>
 
 <h2>${book.title}</h2>
