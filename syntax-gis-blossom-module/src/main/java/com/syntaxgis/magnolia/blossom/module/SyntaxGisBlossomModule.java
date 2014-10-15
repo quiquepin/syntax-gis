@@ -38,12 +38,12 @@ import info.magnolia.module.ModuleLifecycleContext;
 import info.magnolia.module.blossom.module.BlossomModuleSupport;
 
 /**
- * This class manages the lifecycle of the blossomSampleModule module. It starts and stops Spring when Magnolia starts up and
+ * This class manages the lifecycle of the syntaxGisBlossomModule module. It starts and stops Spring when Magnolia starts up and
  * shuts down. The dispatcher servlet we create here is a servlet but its managed internally and never exposed to the
  * outside world. A request will never reach this servlet directly. It is only accessed by Magnolia to render the
  * templates, areas and components and display the dialogs managed by the servlet.
  */
-public class BlossomSampleModule extends BlossomModuleSupport implements ModuleLifecycle {
+public class SyntaxGisBlossomModule extends BlossomModuleSupport implements ModuleLifecycle {
 
     public void start(ModuleLifecycleContext moduleLifecycleContext) {
         if (moduleLifecycleContext.getPhase() == ModuleLifecycleContext.PHASE_SYSTEM_STARTUP) {

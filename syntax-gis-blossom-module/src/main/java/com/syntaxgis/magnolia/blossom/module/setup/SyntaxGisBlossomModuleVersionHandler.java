@@ -50,7 +50,7 @@ import java.util.List;
  * by registering "deltas" to maintain the module's configuration, or other type of content.
  * If you don't need this, simply remove the reference to this class in the module descriptor xml.
  */
-public class BlossomSampleModuleVersionHandler extends DefaultModuleVersionHandler {
+public class SyntaxGisBlossomModuleVersionHandler extends DefaultModuleVersionHandler {
 
     protected List<Task> getStartupTasks(final InstallContext ctx) {
 

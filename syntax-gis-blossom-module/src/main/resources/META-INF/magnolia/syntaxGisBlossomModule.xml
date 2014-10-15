@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE module SYSTEM "module.dtd" >
 <module>
-  <name>blossomSampleModule</name>
+  <name>syntaxGisBlossomModule</name>
   <displayName>${project.name}</displayName>
   <description>${project.description}</description>
-  <class>com.syntaxgis.magnolia.blossom.module.BlossomSampleModule</class>
-  <versionHandler>com.syntaxgis.magnolia.blossom.module.setup.BlossomSampleModuleVersionHandler</versionHandler>
+  <class>com.syntaxgis.magnolia.blossom.module.SyntaxGisBlossomModule</class>
+  <versionHandler>com.syntaxgis.magnolia.blossom.module.setup.SyntaxGisBlossomModuleVersionHandler</versionHandler>
   <version>${project.version}</version>
 
   <dependencies>

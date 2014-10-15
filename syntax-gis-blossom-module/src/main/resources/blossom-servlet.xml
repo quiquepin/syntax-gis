@@ -50,7 +50,7 @@
   <!-- JSP - renders all views that end with .jsp -->
   <bean class="info.magnolia.module.blossom.view.TemplateViewResolver">
     <property name="order" value="2"/>
-    <property name="prefix" value="/templates/blossomSampleModule/"/>
+    <property name="prefix" value="/templates/syntaxGisBlossomModule/"/>
     <property name="viewNames" value="*.jsp"/>
     <property name="viewRenderer">
       <bean class="info.magnolia.module.blossom.view.JspTemplateViewRenderer">
@@ -83,7 +83,7 @@
   <!-- Freemarker - renders all views that end with .ftl -->
   <bean class="info.magnolia.module.blossom.view.TemplateViewResolver">
     <property name="order" value="3"/>
-    <property name="prefix" value="/blossomSampleModule/"/>
+    <property name="prefix" value="/syntaxGisBlossomModule/"/>
     <property name="viewNames" value="*.ftl"/>
     <property name="viewRenderer">
       <bean class="info.magnolia.module.blossom.view.FreemarkerTemplateViewRenderer">
