@@ -108,9 +108,9 @@ public class NavigationBar {
     public void contentTab(UiConfig cfg, TabBuilder tab) {
 
         tab.fields(cfg.fields.checkbox(IN_EDIT_PROPERTY).label(IN_EDIT_LABEL).buttonLabel(IN_EDIT_LABEL).defaultValue("true"),
-                cfg.fields.link(PREVIOUS_PAGE_PROPERTY).label(PREVIOUS_PAGE_LABEL).appName("pages"),
+                cfg.fields.link(PREVIOUS_PAGE_PROPERTY).label(PREVIOUS_PAGE_LABEL).appName("pages").required(),
                 cfg.fields.link(NEXT_PAGE_PROPERTY).label(NEXT_PAGE_LABEL).appName("pages"),
-                cfg.fields.link(REQUEST_ORIGIN_PROPERTY).label(ORIGIN_PAGE_LABEL).appName("pages"),
+                cfg.fields.link(REQUEST_ORIGIN_PROPERTY).label(ORIGIN_PAGE_LABEL).appName("pages").required(),
                 cfg.fields.text(PREVIOUS_PAGE_BUTTON_PROPERTY).label(PREVIOUS_PAGE_BUTTON_LABEL).required().defaultValue(
                         PREVIOUS_PAGE_BUTTON_LABEL_DEFAULT).description(PREVIOUS_PAGE_BUTTON_DESCRIPTION),
                 cfg.fields.text(NEXT_PAGE_BUTTON_PROPERTY).label(NEXT_PAGE_BUTTON_LABEL).required().defaultValue(NEXT_PAGE_BUTTON_LABEL_DEFAULT).description(
