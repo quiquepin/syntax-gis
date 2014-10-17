@@ -36,12 +36,15 @@ package com.syntaxgis.magnolia.blossom.module.setup;
 import info.magnolia.module.DefaultModuleVersionHandler;
 import info.magnolia.module.InstallContext;
 import info.magnolia.module.delta.AbstractTask;
+import info.magnolia.module.delta.RemoveNodeTask;
 import info.magnolia.module.delta.Task;
+import info.magnolia.module.delta.BootstrapSingleResource;
 import info.magnolia.module.delta.TaskExecutionException;
 import info.magnolia.module.files.BasicFileExtractor;
 import info.magnolia.module.files.ModuleFileExtractorTransformer;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,6 +54,15 @@ import java.util.List;
  * If you don't need this, simply remove the reference to this class in the module descriptor xml.
  */
 public class SyntaxGisBlossomModuleVersionHandler extends DefaultModuleVersionHandler {
+
+    final static String DEFAULT_SITE_DEFINITION_TEMPLATES = "/modules/standard-templating-kit/config/site/templates";
+    final static String CUSTOM_SYNTAX_GIS_SITE_TEMPLATES_DEFINITION = "/mgnl-bootstrap/syntaxGisBlossomModule/config.modules.standard-templating-kit.config.site.templates.xml";
+
+    final static Task REMOVE_DEFAULT_SITE_DEFINITION_TASK = new RemoveNodeTask("Obsolete folder: site definition templates",
+            "Default site definition is obsolete and will be replaced", "config", DEFAULT_SITE_DEFINITION_TEMPLATES);
+
+    final static Task ADD_SITE_DEFINITION_TEMPLATES_TASK = new BootstrapSingleResource("Bootstrap",
+            "Installs the sites template configuration",  CUSTOM_SYNTAX_GIS_SITE_TEMPLATES_DEFINITION);
 
     protected List<Task> getStartupTasks(final InstallContext ctx) {
 
@@ -65,6 +77,6 @@ public class SyntaxGisBlossomModuleVersionHandler extends DefaultModuleVersionHa
                 }
             }
         };
-        return Collections.singletonList(extractTask);
+        return Collections.unmodifiableList(Arrays.asList(extractTask, REMOVE_DEFAULT_SITE_DEFINITION_TASK, ADD_SITE_DEFINITION_TEMPLATES_TASK));
     }
 }
